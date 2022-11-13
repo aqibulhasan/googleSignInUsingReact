@@ -4,6 +4,7 @@ import { gapi } from "gapi-script";
 
 function App() {
     const [profile, setProfile] = useState([]);
+    const [token, setToken] = useState([]);
     const clientId =
         "228665443829-0ei08fbh04okh1fd7nbju4lvj7oc1c3i.apps.googleusercontent.com";
     useEffect(() => {
@@ -19,7 +20,8 @@ function App() {
   const onSuccess = (res) => {
     console.log(res);
     console.log(res.tokenObj);
-    setProfile(res.profileObj);
+      setProfile(res.profileObj);
+      setToken(res.tokenObj);
     };
 
     const onFailure = (err) => {
@@ -37,11 +39,11 @@ function App() {
             <br />
             {profile ? (
                 <div>
-                    <img src={profile.imageUrl} alt="user image" />
                     <h3>User Logged in</h3>
                     <p>Name: {profile.name}</p>
                     <p>Email Address: {profile.email}</p>
-            
+                    <p>{token.id_token}</p>
+
                     <br />
                     <br />
                     <GoogleLogout
